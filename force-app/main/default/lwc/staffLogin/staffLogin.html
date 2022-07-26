@@ -1,0 +1,90 @@
+<template>
+    <!-- <div class="slds-m-left_small slds-m-right_small slds-m-bottom_small">
+        <c-add-student></c-add-student>
+    </div> -->
+    <template for:each={myfor} for:item="i">
+        <div key={i}>{i}</div>
+    </template>
+
+    <div if:true={s} class="slds-align_absolute-center" style="height: 80vh;">
+   <div style="width: 620px;">
+    <div class="login_style">
+    <lightning-card if:true={s} style="height: 80vh;">
+        
+        <h3 class="login_style">Staff Login</h3> <br>
+        
+           
+        
+
+    <template if:true={b}>
+        
+        <lightning-button label="Back" onclick={BackButton}></lightning-button> <br><br>
+        
+<div class="login_style">
+   
+    <lightning-input label="Enter Your Name"  class="login__input" type="text"  onchange={searchContact} value={staffsearchKey}></lightning-input> <br>
+    <lightning-input label="Enter Your Password" class="login__input" type="password"  onchange={searchContact2} value={staffpassKey}></lightning-input> <br>
+
+</div>
+            <template if:true={errormsg}>
+                <p style="color: red;">{errormsg}</p>
+            </template>
+            
+            <template if:true={regerror}>
+                <p style="color: red;">{regerror}</p>
+            </template>
+            
+            <template if:true={passerror}>
+                <p style="color: red;">{passerror}</p>
+            </template>
+
+            	
+
+<div class="login_style">
+    <button  class="slds-button slds-button_brand" style="width:150px;margin-top:20px;margin-right: 472px;" id="#gem" onclick={loginHandler}>Login</button>
+</div>
+    
+
+     </template>
+     
+  
+
+    
+    
+    <template if:true={error}>
+        {error}>
+    </template>       
+
+    
+
+
+   
+        
+
+</lightning-card>
+</div>
+</div>
+</div>
+
+
+
+<template if:true={a}>
+    <div style="width:100%;">
+    <lightning-button label="Back" onclick={BackButton}></lightning-button> <br>
+    <div class="slds-m-left_small slds-m-right_small slds-m-bottom_small">
+        <c-add-student></c-add-student>
+    </div>
+    <div class="slds-m-left_small slds-m-right_small slds-m-bottom_small">
+        <c-search onsearch={handleEvent}></c-search>
+    </div>
+    <div class="slds-m-left_small slds-m-right_small slds-m-bottom_small" style="background-color: aqua;">
+        <template if:true={studentRecords}> 
+            <c-display-student student-record={studentRecords} update-data=true delete-data=true></c-display-student>
+        </template>
+    </div>
+</div>
+</template>
+    
+
+
+</template>

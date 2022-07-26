@@ -1,0 +1,201 @@
+<template>
+    <div if:true={s} class="slds-align_absolute-center" style="height: 80vh">
+        <div style="width: 620px;">
+            <div class="login_style">
+    <lightning-card title="Student Login">
+        <lightning-button label="Home" onclick={BackButtona}></lightning-button> <br><br>
+    <template if:true={b}>
+        <div class="login_style">
+    <lightning-input placeholder="Enter your Register Number" label="Register Number" type="text"  onchange={searchContact} value={searchKey}></lightning-input> <br>
+    <lightning-input placeholder="Enter your Password" label="Password" type="password"  onchange={searchContact2} value={passKey}></lightning-input> <br>
+        </div>
+    <template if:true={errormsg}>
+        <p style="color: red;">{errormsg}</p>
+    </template>
+    <template if:true={regerror}>
+        <p style="color: red;">{regerror}</p>
+    </template>
+    <div class="login_style">
+    <button  class="slds-button slds-button_brand" style="width:150px;margin-top:20px;margin-right: 472px;" id="#gem" onclick={loginHandler}>Login</button> 
+     </div>
+</template>
+     
+    
+    </lightning-card>
+    
+
+
+  
+      </div>
+      </div>
+      </div>
+      <template if:true={a}>
+        <template if:true={contacts}>                        
+            <template for:each={contacts} for:item="contact">                        
+                <div key={contact.id}>   
+                    <lightning-card class="slds-grid slds-gutters slds-align_absolute-center">
+                    <lightning-button label="Back" onclick={BackButton}></lightning-button>
+
+                    <div class="slds-col slds-size_2-of-3" style="display: flex;font-size: 1rem">
+                    <p style="color:red;">Hai {contact.Name}!! this is your Profile...</p><br><br>    
+                    <div class="slds-col slds-size_1-of-3">
+                        <p>
+                            <!-- <img src={item.image__c} width="100" height="100" /> -->
+                            <lightning-formatted-rich-text  value={contact.image__c}></lightning-formatted-rich-text>
+
+                        </p>
+                    </div>
+                    Name: &nbsp; {contact.Name} <br>
+                    Reg No:&nbsp;  {contact.Reg_no__c} <br>
+                    Email Id:&nbsp; {contact.Email__c} <br>
+                    DOB:&nbsp; {contact.DOB__c} <br>
+                    Father Name:&nbsp; {contact.Father_Name__c} <br>
+                    Phone:&nbsp; {contact.phone__c} <br>
+                    Course:&nbsp; {contact.Course__c} <br>
+                    Address:&nbsp; {contact.Address__c}
+                    </div>
+
+                    
+                    
+                    
+                    <br>
+                    <!-- <p>Course Duration</p> <br>
+                    From: {contact.From__c} <br>
+                    To: {contact.To__c} <br> -->
+                    <button class="slds-button slds-button_brand" style="width:150px;margin-top:20px;margin-right: 472px;"  onclick={markHandler}>View Result</button> 
+                    
+                    <button class="slds-button slds-button_brand" style="width:150px;margin-top:20px;margin-right: 472px;"  onclick={taskbtn}>View Task</button> 
+
+                    <button class="slds-button slds-button_brand" style="width:150px;margin-top:20px;margin-right: 472px;"  onclick={openLeave}>Apply Leave</button> 
+
+
+                    </lightning-card>
+
+                    <br>
+                    <template if:true={mymark}>
+                    <lightning-card class="slds-grid slds-gutters slds-align_absolute-center">
+                    <button  class="slds-button slds-button_brand" style="width:150px;margin-top:20px;margin-right: 472px;"  onclick={BackProfile}>Back to Profile</button> 
+                    <div  class="slds-col slds-size_2-of-3" style="display: flex;font-size: 1rem">
+                    <p>Result</p> <br>
+                    <!-- English: {contact.English__c} <br>
+                    Pysics:{contact.Physics__c} <br>
+                    Chemistry: {contact.Chemistry__c} -->
+                    
+                    Register Number:&nbsp; {contact.Reg_no__c} <br>
+                    SEM:&nbsp; {contact.Sem__c} <br>
+                    <h1 style="color:red;">Subject</h1> <br>
+                    Computer Arc:&nbsp; {contact.Computer_Arc__c} <br>
+                    Data Structure:&nbsp; {contact.Data_Structure__c} <br>
+                    DBMS:&nbsp; {contact.DBMS__c} <br>
+                    Digital Science:&nbsp; {contact.Digital_Science__c} <br>
+                    Internet of Things:&nbsp; {contact.Internet_of_Things__c} <br>
+
+                    &nbsp; <p style="color:green;">{contact.Status__c}</p>
+
+
+                    
+                        
+                    
+                    </div>
+                    </lightning-card>
+
+                    
+                    </template>
+                    
+
+                    <template if:true={modaltask}>
+                        <lightning-card class="slds-grid slds-gutters slds-align_absolute-center">
+                        <button  class="slds-button slds-button_brand" style="width:150px;margin-top:20px;margin-right: 472px;"  onclick={BackProfile}>Back to Profile</button> 
+                        <div  class="slds-col slds-size_2-of-3" style="display: flex;font-size: 1rem">
+                        <p>Task</p> <br>
+                        <!-- English: {contact.English__c} <br>
+                        Pysics:{contact.Physics__c} <br>
+                        Chemistry: {contact.Chemistry__c} -->
+                        
+                        Task Name:&nbsp; {contact.Task_Name__c} <br>
+                        Task description:&nbsp; {contact.Task_Description__c} <br>
+                      
+                        Task DeadLine:&nbsp; {contact.DeadLine__c}<br>
+                        <!-- <lightning-combobox name="status"
+                        label="Status"
+                        placeholder="Choose Status"
+                        value={value}
+                        onchange={handleChange} options={statusOptions}></lightning-combobox> -->
+                    
+    
+    
+                        
+                            
+                        
+                        </div>
+                        </lightning-card>
+    
+                        
+                        </template>
+
+
+                        <template if:true={modalleave}>
+                            <lightning-card class="slds-grid slds-gutters slds-align_absolute-center">
+                            <button  class="slds-button slds-button_brand" style="width:150px;margin-top:20px;margin-right: 472px;"  onclick={closeleave}>Back to Profile</button> 
+                            <div  class="slds-col slds-size_2-of-3" style="display: flex;font-size: 1rem">
+                            <p>Leave Request</p> <br>
+                            
+                            
+
+                            <lightning-input onchange={handleInputChangeleave} type="date" name="From__c" value={abc1}
+                            label="From" required="true"></lightning-input> <br><br>
+                            
+                            <lightning-input onchange={handleInputChangeleave1} type="date" name="To__c" value={abc2}
+                            label="To" required="true"></lightning-input>
+                            <br>
+
+                            <lightning-textarea onchange={handleInputChangeleave1} type="text" name="comment__c"  value={abc3}
+                            label="Comment" required="true"></lightning-textarea>
+                            <br>
+                                
+                            <!-- <lightning-input onchange={handleInputChangeleave} type="text" name="comment__c"
+                            label="comment" ></lightning-input>
+                                  -->
+                            
+               
+                        
+        
+        
+                            
+                        <footer class="slds-modal__footer">
+                            <!-- <lightning-button label="Total Days" variant="brand" onclick={show}>
+                            </lightning-button> -->
+                            &nbsp;
+                            <lightning-button label="Apply" variant="brand" onclick={saveMethodtask}>
+                            </lightning-button>
+                            <!-- <div>
+                                <p>Total {Diff}</p>
+                                <lightning-button label="Total Days" variant="brand" onclick={show}>
+                                </lightning-button>
+                            </div> -->
+                            
+                        
+                        </footer> 
+                            </div>
+                            </lightning-card>
+        
+                            
+                            </template>
+                </div>
+            </template>
+        </template>
+        
+
+        
+        <template if:true={error}>
+            {error}>
+        </template>        
+      </template>
+
+
+     
+
+
+
+        
+</template>
